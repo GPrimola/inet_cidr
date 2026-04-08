@@ -24,3 +24,7 @@ inet_cidr-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+# Dialyzer files
+/priv/plts/*.plt
+/priv/plts/*.plt.hash

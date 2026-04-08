@@ -103,6 +103,26 @@ iex> InetCidr.calc_end_address!({192, 168, 0, 0}, 16)
 {192, 168, 255, 255}
 ```
 
+### Check if two CIDR blocks are disjoint
+
+This works for IPv4 and IPv6 CIDR blocks.
+
+```elixir
+iex> cidr1 = InetCidr.parse_cidr!("192.168.0.0/24")
+{{192,168,0,0}, {192,168,0,255}, 24}
+
+iex> cidr2 = InetCidr.parse_cidr!("192.168.1.0/24")
+{{192,168,1,0}, {192,168,1,255}, 24}
+
+iex> InetCidr.disjoint?(cidr1, cidr2)
+true
+
+iex> cidr3 = InetCidr.parse_cidr!("192.168.0.0/16")
+{{192,168,0,0}, {192,168,255,255}, 16}
+
+iex> InetCidr.disjoint?(cidr1, cidr3)
+false
+
 ## License
 
 Copyright (c) 2015-2025 Cobenian and Bryan Weber

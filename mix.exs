@@ -13,6 +13,7 @@ defmodule InetCidr.Mixfile do
       description: description(),
       package: package(),
       deps: deps(),
+      dialyzer: dialyzer(),
       # docs
       name: "InetCidr",
       source_url: @source_url,
@@ -25,7 +26,18 @@ defmodule InetCidr.Mixfile do
   end
 
   defp deps do
-    [{:ex_doc, ">= 0.0.0", only: :dev, runtime: false, warn_if_outdated: true}]
+    [
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false, warn_if_outdated: true},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false, warn_if_outdated: true}
+    ]
+  end
+
+  defp dialyzer do
+    [
+      plt_local_path: "priv/plts/project.plt",
+      ignore_warnings: ".dialyzer_ignore.exs",
+      list_unused_filters: true
+    ]
   end
 
   defp docs do
